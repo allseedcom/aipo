@@ -1,4 +1,5 @@
 /*
+ /*
  * Aipo is a groupware program developed by TOWN, Inc.
  * Copyright (C) 2004-2015 TOWN, Inc.
  * http://www.aipo.com
@@ -19,7 +20,6 @@
 package com.aimluck.eip.modules.screens;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,7 +45,6 @@ import com.aimluck.eip.schedule.util.ScheduleUtils;
 import com.aimluck.eip.services.accessctl.ALAccessControlConstants;
 import com.aimluck.eip.services.accessctl.ALAccessControlFactoryService;
 import com.aimluck.eip.services.accessctl.ALAccessControlHandler;
-import com.aimluck.eip.services.orgutils.ALOrgUtilsService;
 import com.aimluck.eip.util.ALEipUtils;
 import com.aimluck.eip.util.ALLocalizationUtils;
 
@@ -69,10 +68,6 @@ public class ScheduleCsvExportScreen extends ALCSVScreen {
 
   private List<FacilityResultData> facilityAllList;
 
-  private String fileNamePrefix;
-
-  private String fileNameSuffix;
-
   /** 日付の表示フォーマット */
   public static final String DEFAULT_DATE_TIME_FORMAT = "yyyyMMdd";
 
@@ -94,8 +89,6 @@ public class ScheduleCsvExportScreen extends ALCSVScreen {
    */
   @Override
   protected String getCSVString(RunData rundata) throws Exception {
-    fileNamePrefix = "";
-    fileNameSuffix = "";
     if (ALEipUtils.isAdmin(rundata)) {
       userid = ALEipUtils.getUserId(rundata);
       ALAccessControlFactoryService aclservice =
@@ -120,8 +113,6 @@ public class ScheduleCsvExportScreen extends ALCSVScreen {
         DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.JAPAN).parse(
           rundata.getParameters().get("end_day"));
       int userid = ALEipUtils.getUserId(rundata);
-
-      fileNameSuffix = getFileNameSurffix(viewStart, viewEnd);
 
       // 有効なユーザーを全て取得する
       users = ALEipUtils.getUsers("LoginUser");
@@ -308,33 +299,12 @@ public class ScheduleCsvExportScreen extends ALCSVScreen {
 
         return sb.toString();
       } catch (Exception e) {
-        logger.error("ScheduleCsvFileScreen.getCSVString", e);
+        logger.error("ScheduleCsvExportScreen.getCSVString", e);
         return null;
       }
     } else {
       throw new ALPermissionException();
     }
-  }
-
-  /**
-   * @param viewStart
-   * @param viewEnd
-   * @return
-   */
-  private String getFileNameSurffix(Date viewStart, Date viewEnd) {
-
-    String viewStartFormat =
-      new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT)
-        .format(viewStart.getTime());
-
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(viewEnd);
-    cal.add(Calendar.DATE, -1);
-
-    String viewEndFormat =
-      new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT).format(cal.getTime());
-
-    return viewStartFormat + "-" + viewEndFormat;
   }
 
   /**
@@ -430,10 +400,6 @@ public class ScheduleCsvExportScreen extends ALCSVScreen {
 
   @Override
   protected String getFileName() {
-    return ALOrgUtilsService.getAlias()
-      + fileNamePrefix
-      + "_schedules_"
-      + fileNameSuffix
-      + ".csv";
+    return "Aipo_schedules.csv";
   }
 }
