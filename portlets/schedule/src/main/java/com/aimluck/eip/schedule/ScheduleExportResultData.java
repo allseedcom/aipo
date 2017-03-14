@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.aimluck.eip.schedule.util;
+package com.aimluck.eip.schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +29,6 @@ import com.aimluck.commons.field.ALStringField;
 import com.aimluck.eip.common.ALEipHolidaysManager;
 import com.aimluck.eip.common.ALEipUser;
 import com.aimluck.eip.facilities.FacilityResultData;
-import com.aimluck.eip.schedule.ScheduleDetailResultData;
 import com.aimluck.eip.util.ALLocalizationUtils;
 
 /**
