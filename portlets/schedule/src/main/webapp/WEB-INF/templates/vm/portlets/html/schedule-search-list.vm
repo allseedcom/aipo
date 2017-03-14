@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *#
 ## ---------------------------------------------------------------------------
+
+
 #if(!$result.CurrentFilter)
 #set ($filter = "")
 #else
@@ -78,10 +80,10 @@
 #if(${client}!="IPHONE")
 
 <div class="floatRight">
+#set($dlLink = $!utils.escapeXML($jslink.getTemplate('FileIOScheduleCsvExportScreen').addQueryData('start_day',$!{result.StartDate}).addQueryData('end_day',$!{result.EndDate})))
+#####.addQueryData('start_day',$!{result.StartDate}).addQueryData('end_day',$!{result.EndDate})
 #set($title = "$l10n.SCHEDULE_DOWNLOAD")
-#set($dlLink = $!utils.escapeXML($jslink.getTemplate('ScheduleCsvExportScreen')))
-####.addQueryData('start_day',$!{result.StartDate}).addQueryData('end_day',$!{result.EndDate})
-<a class="auiButton" title="$title" href="javascript:void(0);" onclick="aipo.schedule.downloadCvn(${result.isOverSize()},${result.MaxSize},'$dlLink');" >$title</a>
+<a class="auiButton" title="$title" href="javascript:void(0);" onclick="aipo.schedule.downloadCvn('$dlLink');" >$title</a>
 
 #AUIprintbutton($!jslink.getPortletById($!portlet.ID).addQueryData("template","ScheduleScreenPrint").addQueryData("entityid","new"))
 </div>

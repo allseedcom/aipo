@@ -96,7 +96,9 @@ public class FileIOScheduleCsvExportScreen extends ALCSVScreen {
   protected String getCSVString(RunData rundata) throws Exception {
     fileNamePrefix = "";
     fileNameSuffix = "";
+
     if (ALEipUtils.isAdmin(rundata)) {
+
       userid = ALEipUtils.getUserId(rundata);
       ALAccessControlFactoryService aclservice =
         (ALAccessControlFactoryService) ((TurbineServices) TurbineServices

@@ -167,17 +167,8 @@ aipo.schedule.hideDialog = function() {
 };
 
 
-aipo.schedule.downloadCvn = function(flag_over_size,schedule_max,url){
-	var nlsStrings = dojo.i18n.getLocalization("aipo", "locale");
-	var confirmString = dojo.string.substitute(nlsStrings.SCHEDULE_STR, {
-		max : schedule_max
-	  });
-
-	if(flag_over_size){
-		alert(confirmString);
-	}else{
+aipo.schedule.downloadCvn = function(url){
 		window.location.href=url;
-	}
 }
 
 aipo.schedule.onLoadScheduleDetail = function(portlet_id){

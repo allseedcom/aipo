@@ -18,8 +18,8 @@
  *#
 ## ---------------------------------------------------------------------------
 <script type="text/JavaScript">
-<!--
 
+<!--
 function onClick_Select(button){
     disableButton(button.form);
     var option = button.form.SelectMenu0.options[button.form.SelectMenu0.selectedIndex];
@@ -149,7 +149,7 @@ function hide_Attention(){
 	}
 }
 
-//-->
+-->
 </script>
 #if(${client}=="IPHONE")
 #ALcontentheader($!portlet.Title '')
